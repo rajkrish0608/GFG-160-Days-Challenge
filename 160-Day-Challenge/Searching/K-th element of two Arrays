@@ -1,3 +1,10 @@
+/*
+ * Name: Raj Krish
+ * Github: rajkrish0608
+ * Linkedln: www.linkedin.com/in/rajkrish0608
+ */
+
+
 class Solution {
     public int kthElement(int a[], int b[], int k) {
         int n = a.length, m = b.length;
