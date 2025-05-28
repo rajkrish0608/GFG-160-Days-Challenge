@@ -1,0 +1,43 @@
+/*
+ * Name: Raj Krish
+ * Github: rajkrish0608
+ * Linkedln: www.linkedin.com/in/rajkrish0608
+ */
+
+
+class Solution {
+    public static int aggressiveCows(int[] stalls, int k) {
+         Arrays.sort(stalls);  // Sort stall positions
+        
+        int low = 1; // minimum possible distance
+        int high = stalls[stalls.length - 1] - stalls[0]; // maximum possible distance
+        int result = 0;
+        
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            
+            if (canPlaceCows(stalls, k, mid)) {
+                result = mid;       // Mid is a possible answer, try for bigger
+                low = mid + 1;
+            } else {
+                high = mid - 1;     // Try smaller distance
+            }
+        }
+        return result;
+    }
+
+    private static boolean canPlaceCows(int[] stalls, int k, int minDist) {
+        int cowsPlaced = 1;     // Place first cow in the first stall
+        int lastPos = stalls[0];
+        
+        for (int i = 1; i < stalls.length; i++) {
+            if (stalls[i] - lastPos >= minDist) {
+                cowsPlaced++;
+                lastPos = stalls[i];
+            }
+            if (cowsPlaced == k) return true;
+        }
+        return false;
+        
+    }
+}
