@@ -1,0 +1,58 @@
+/*
+ * Name: Raj Krish
+ * Github: rajkrish0608
+ * Linkedln: www.linkedin.com/in/rajkrish0608
+ */
+
+
+class Solution {
+    public static int findPages(int[] arr, int k) {
+        if (arr.length < k) return -1;
+
+        int low = getMax(arr);
+        int high = getSum(arr);
+        int result = -1;
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+
+            if (isValid(arr, k, mid)) {
+                result = mid;         // Try to minimize
+                high = mid - 1;
+            } else {
+                low = mid + 1;        // Try higher limit
+            }
+        }
+
+        return result;
+    }
+
+    private static boolean isValid(int[] arr, int k, int maxPages) {
+        int students = 1, currentSum = 0;
+
+        for (int pages : arr) {
+            if (currentSum + pages > maxPages) {
+                students++;
+                currentSum = pages;
+            } else {
+                currentSum += pages;
+            }
+
+            if (students > k) return false;
+        }
+
+        return true;
+    }
+
+    private static int getSum(int[] arr) {
+        int sum = 0;
+        for (int val : arr) sum += val;
+        return sum;
+    }
+
+    private static int getMax(int[] arr) {
+        int max = 0;
+        for (int val : arr) max = Math.max(max, val);
+        return max;
+    }
+}
