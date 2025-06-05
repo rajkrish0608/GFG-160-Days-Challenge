@@ -1,0 +1,61 @@
+/*
+ * Name: Raj Krish
+ * Github: rajkrish0608
+ * Linkedln: www.linkedin.com/in/rajkrish0608
+ */
+class Solution {
+    public void setMatrixZeroes(int[][] mat) {
+        int n = mat.length;
+        int m = mat[0].length;
+        
+        boolean firstRowZero = false;
+        boolean firstColZero = false;
+
+        // Step 1: Check if first row or column has zero
+        for (int i = 0; i < n; i++) {
+            if (mat[i][0] == 0) {
+                firstColZero = true;
+                break;
+            }
+        }
+
+        for (int j = 0; j < m; j++) {
+            if (mat[0][j] == 0) {
+                firstRowZero = true;
+                break;
+            }
+        }
+
+        // Step 2: Use first row and column to mark zeros
+        for (int i = 1; i < n; i++) {
+            for (int j = 1; j < m; j++) {
+                if (mat[i][j] == 0) {
+                    mat[i][0] = 0;
+                    mat[0][j] = 0;
+                }
+            }
+        }
+
+        // Step 3: Set cells to zero based on marks
+        for (int i = 1; i < n; i++) {
+            for (int j = 1; j < m; j++) {
+                if (mat[i][0] == 0 || mat[0][j] == 0) {
+                    mat[i][j] = 0;
+                }
+            }
+        }
+
+        // Step 4: Zero out first row and column if needed
+        if (firstColZero) {
+            for (int i = 0; i < n; i++) {
+                mat[i][0] = 0;
+            }
+        }
+
+        if (firstRowZero) {
+            for (int j = 0; j < m; j++) {
+                mat[0][j] = 0;
+            }
+        }
+    }
+}
