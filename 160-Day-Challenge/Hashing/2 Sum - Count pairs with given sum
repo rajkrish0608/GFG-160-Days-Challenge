@@ -1,0 +1,29 @@
+/*
+ * Name: Raj Krish
+ * Github: rajkrish0608
+ * Linkedln: www.linkedin.com/in/rajkrish0608
+ */
+
+
+class Solution {
+
+    int countPairs(int arr[], int target) {
+         HashMap<Integer, Integer> map = new HashMap<>();
+        int count = 0;
+
+        for (int num : arr) {
+            int complement = target - num;
+
+            // If complement exists, it will form valid pairs with num
+            if (map.containsKey(complement)) {
+                count += map.get(complement);
+            }
+
+            // Add current number to the map
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+
+        return count;
+        
+    }
+}
