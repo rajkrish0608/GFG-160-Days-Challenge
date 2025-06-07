@@ -4,7 +4,6 @@
  * Linkedln: www.linkedin.com/in/rajkrish0608
  */
 
-
 class Solution {
 
     int countPairs(int arr[], int target) {
