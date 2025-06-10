@@ -1,0 +1,23 @@
+/*
+ * Name: Raj Krish
+ * Github: rajkrish0608
+ * Linkedln: www.linkedin.com/in/rajkrish0608
+ */
+
+
+class Solution {
+    public static int findUnion(int a[], int b[]) {
+         HashSet<Integer> unionSet = new HashSet<>();
+
+        for (int num : a) {
+            unionSet.add(num);
+        }
+
+        for (int num : b) {
+            unionSet.add(num);
+        }
+
+        return unionSet.size();
+        
+    }
+}
