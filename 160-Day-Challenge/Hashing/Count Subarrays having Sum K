@@ -1,0 +1,27 @@
+/*
+ * Name: Raj Krish
+ * Github: rajkrish0608
+ * Linkedln: www.linkedin.com/in/rajkrish0608
+ */
+
+
+class Solution {
+    public int countSubarrays(int arr[], int k) {
+        Map<Integer, Integer> prefixSumMap = new HashMap<>();
+        int count = 0;
+        int prefixSum = 0;
+
+        prefixSumMap.put(0, 1);
+
+        for (int num : arr) {
+            prefixSum += num;
+
+            count += prefixSumMap.getOrDefault(prefixSum - k, 0);
+         
+            prefixSumMap.put(prefixSum, prefixSumMap.getOrDefault(prefixSum, 0) + 1);
+        }
+
+        return count;
+        
+    }
+}
