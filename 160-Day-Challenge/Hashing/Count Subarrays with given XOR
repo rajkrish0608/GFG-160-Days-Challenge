@@ -1,0 +1,28 @@
+/*
+ * Name: Raj Krish
+ * Github: rajkrish0608
+ * Linkedln: www.linkedin.com/in/rajkrish0608
+ */
+
+
+class Solution {
+    public long subarrayXor(int arr[], int k) {
+        Map<Integer, Integer> xorFreq = new HashMap<>();
+        int xor = 0;
+        long count = 0;
+
+        xorFreq.put(0, 1);
+        for (int num : arr) {
+            xor ^= num;
+
+            int required = xor ^ k;
+            count += xorFreq.getOrDefault(required, 0);
+
+            
+            xorFreq.put(xor, xorFreq.getOrDefault(xor, 0) + 1);
+        }
+
+        return count;
+        
+    }
+}
