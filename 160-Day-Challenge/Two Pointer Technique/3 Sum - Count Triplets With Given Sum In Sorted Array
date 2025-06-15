@@ -1,0 +1,57 @@
+/*
+ * Name: Raj Krish
+ * Github: rajkrish0608
+ * Linkedln: www.linkedin.com/in/rajkrish0608
+ */
+
+
+class Solution {
+    public int countTriplets(int[] arr, int target) {
+         int n = arr.length;
+        int count = 0;
+
+        for (int i = 0; i < n - 2; i++) {
+            int left = i + 1;
+            int right = n - 1;
+
+            while (left < right) {
+                int sum = arr[i] + arr[left] + arr[right];
+
+                if (sum == target) {
+                    // Case when left == right not needed due to left < right condition
+                    if (arr[left] == arr[right]) {
+                        int total = right - left + 1;
+                        count += total * (total - 1) / 2;
+                        break;
+                    } else {
+                        int leftCount = 1;
+                        int rightCount = 1;
+
+                        // Count duplicates from left side
+                        while (left + 1 < right && arr[left] == arr[left + 1]) {
+                            leftCount++;
+                            left++;
+                        }
+
+                        // Count duplicates from right side
+                        while (right - 1 > left && arr[right] == arr[right - 1]) {
+                            rightCount++;
+                            right--;
+                        }
+
+                        count += leftCount * rightCount;
+                        left++;
+                        right--;
+                    }
+                } else if (sum < target) {
+                    left++;
+                } else {
+                    right--;
+                }
+            }
+        }
+
+        return count;
+        
+    }
+}
