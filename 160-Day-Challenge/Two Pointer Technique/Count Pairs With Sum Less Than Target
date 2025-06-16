@@ -1,0 +1,29 @@
+/*
+ * Name: Raj Krish
+ * Github: rajkrish0608
+ * Linkedln: www.linkedin.com/in/rajkrish0608
+ */
+
+
+class Solution {
+    int countPairs(int arr[], int target) {
+         Arrays.sort(arr);  // Sort the array first
+        int left = 0, right = arr.length - 1;
+        int count = 0;
+
+        while (left < right) {
+            int sum = arr[left] + arr[right];
+
+            if (sum < target) {
+                // All elements from left+1 to right will also form valid pairs with arr[left]
+                count += (right - left);
+                left++;
+            } else {
+                right--;
+            }
+        }
+
+        return count;
+        
+    }
+}
