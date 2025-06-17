@@ -1,0 +1,45 @@
+/*
+ * Name: Raj Krish
+ * Github: rajkrish0608
+ * Linkedln: www.linkedin.com/in/rajkrish0608
+ */
+
+
+class Solution {
+    public List<Integer> sumClosest(int[] arr, int target) {
+        List<Integer> result = new ArrayList<>();
+
+        if (arr.length < 2) return result;
+
+        Arrays.sort(arr);
+
+        int left = 0, right = arr.length - 1;
+        int closestSum = Integer.MAX_VALUE;
+        int maxAbsDiff = Integer.MIN_VALUE;
+
+        while (left < right) {
+            int sum = arr[left] + arr[right];
+            int diff = Math.abs(sum - target);
+
+            if (diff < Math.abs(closestSum - target)) {
+                // Found better sum
+                closestSum = sum;
+                result = Arrays.asList(arr[left], arr[right]);
+                maxAbsDiff = Math.abs(arr[left] - arr[right]);
+            } else if (diff == Math.abs(closestSum - target)) {
+                // If same closeness, pick the one with max absolute difference
+                int currentAbsDiff = Math.abs(arr[left] - arr[right]);
+                if (currentAbsDiff > maxAbsDiff) {
+                    result = Arrays.asList(arr[left], arr[right]);
+                    maxAbsDiff = currentAbsDiff;
+                }
+            }
+
+            if (sum < target) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+
+        return result;
