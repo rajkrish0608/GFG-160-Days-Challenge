@@ -1,0 +1,32 @@
+/*
+ * Name: Raj Krish
+ * Github: rajkrish0608
+ * Linkedln: www.linkedin.com/in/rajkrish0608
+ */
+
+
+class Solution {
+    // Function to count the number of possible triangles.
+    static int countTriangles(int arr[]) {
+        int n = arr.length;
+        Arrays.sort(arr);
+        int count = 0;
+
+        for (int i = n - 1; i >= 2; i--) {
+            int left = 0, right = i - 1;
+
+            while (left < right) {
+                if (arr[left] + arr[right] > arr[i]) {
+                    count += (right - left); // all combinations from left to right-1
+                    right--;
+                } else {
+                    left++;
+                }
+            }
+        }
+
+        return count;
+
+        
+    }
+}
