@@ -1,0 +1,34 @@
+/*
+ * Name: Raj Krish
+ * Github: rajkrish0608
+ * Linkedln: www.linkedin.com/in/rajkrish0608
+ */
+
+class Solution {
+    ArrayList<Integer> countDistinct(int arr[], int k) {
+        ArrayList<Integer> result = new ArrayList<>();
+        HashMap<Integer, Integer> freqMap = new HashMap<>();
+
+        for (int i = 0; i < arr.length; i++) {
+            // Add current element to the map
+            freqMap.put(arr[i], freqMap.getOrDefault(arr[i], 0) + 1);
+
+            // Remove the element which is out of the current window
+            if (i >= k) {
+                int outgoing = arr[i - k];
+                freqMap.put(outgoing, freqMap.get(outgoing) - 1);
+                if (freqMap.get(outgoing) == 0) {
+                    freqMap.remove(outgoing);
+                }
+            }
+
+            // Start recording result only after the first window
+            if (i >= k - 1) {
+                result.add(freqMap.size());
+            }
+        }
+
+        return result;
+        
+    }
+}
