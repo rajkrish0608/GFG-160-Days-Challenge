@@ -1,0 +1,31 @@
+/*
+ * Name: Raj Krish
+ * Github: rajkrish0608
+ * Linkedln: www.linkedin.com/in/rajkrish0608
+ */
+
+
+class Solution {
+    public int longestUniqueSubstr(String s) {
+        int n = s.length();
+        Set<Character> set = new HashSet<>();
+        int maxLength = 0;
+        int start = 0;
+
+        for (int end = 0; end < n; end++) {
+            char current = s.charAt(end);
+
+            // Remove characters from the set until current character is unique
+            while (set.contains(current)) {
+                set.remove(s.charAt(start));
+                start++;
+            }
+
+            set.add(current);
+            maxLength = Math.max(maxLength, end - start + 1);
+        }
+
+        return maxLength;
+
+    }
+}
