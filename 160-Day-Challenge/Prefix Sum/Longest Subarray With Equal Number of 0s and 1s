@@ -1,0 +1,34 @@
+/*
+ * Name: Raj Krish
+ * Github: rajkrish0608
+ * Linkedln: www.linkedin.com/in/rajkrish0608
+ */
+
+
+class Solution {
+    public int maxLen(int[] arr) {
+        Map<Integer, Integer> firstIndex = new HashMap<>();
+        int sum = 0, maxLen = 0;
+        
+        // Initialize: prefix sum 0 occurs at index -1
+        firstIndex.put(0, -1);
+
+        for (int i = 0; i < arr.length; i++) {
+            // Treat 0 as -1, 1 as +1
+            sum += (arr[i] == 0) ? -1 : 1;
+
+            // If this prefix sum has been seen before,
+            // subarray between its first occurrence and i has sum 0
+            if (firstIndex.containsKey(sum)) {
+                int len = i - firstIndex.get(sum);
+                maxLen = Math.max(maxLen, len);
+            } else {
+                // Record the first occurrence of this prefix sum
+                firstIndex.put(sum, i);
+            }
+        }
+
+        return maxLen;
+        
+    }
+}
