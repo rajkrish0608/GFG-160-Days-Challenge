@@ -1,0 +1,21 @@
+/*
+ * Name: Raj Krish
+ * Github: rajkrish0608
+ * Linkedln: www.linkedin.com/in/rajkrish0608
+ */
+
+class Solution {
+    Node reverseList(Node head) {
+        Node prev = null;
+        Node curr = head;
+        
+        while (curr != null) {
+            Node next = curr.next;  // Store next node
+            curr.next = prev;       // Reverse current node's pointer
+            prev = curr;            // Move prev and curr one step forward
+            curr = next;
+        }
+        
+        return prev; // New head
+    }
+}
