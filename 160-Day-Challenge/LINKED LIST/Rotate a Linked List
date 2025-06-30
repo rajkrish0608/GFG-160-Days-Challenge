@@ -1,0 +1,51 @@
+/*
+ * Name: Raj Krish
+ * Github: rajkrish0608
+ * Linkedln: www.linkedin.com/in/rajkrish0608
+ */
+
+
+/* node of linked list:
+
+class Node{
+    int data;
+    Node next;
+    Node(int d){
+        data=d;
+        next=null;
+    }
+}
+
+*/
+
+class Solution {
+    public Node rotate(Node head, int k) {
+        if (head == null || head.next == null || k == 0)
+            return head;
+
+        // Step 1: Count the length of the linked list
+        int length = 1;
+        Node tail = head;
+        while (tail.next != null) {
+            tail = tail.next;
+            length++;
+        }
+
+        // Step 2: Normalize k
+        k = k % length;
+        if (k == 0) return head;
+
+        // Step 3: Traverse to the (k)th node
+        Node curr = head;
+        for (int i = 1; i < k; i++) {
+            curr = curr.next;
+        }
+
+        // Step 4: Update pointers
+        Node newHead = curr.next;
+        curr.next = null;
+        tail.next = head;
+
+        return newHead;
+    }
+}
