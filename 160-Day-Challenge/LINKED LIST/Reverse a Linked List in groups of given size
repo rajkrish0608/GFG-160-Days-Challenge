@@ -1,0 +1,45 @@
+/*
+ * Name: Raj Krish
+ * Github: rajkrish0608
+ * Linkedln: www.linkedin.com/in/rajkrish0608
+ */
+
+
+class Solution {
+    public static Node reverseKGroup(Node head, int k) {
+                Node curr = head;
+        Node prev = null;
+        Node next = null;
+
+        // Count the number of nodes in current group
+        int count = 0;
+        Node temp = head;
+        while (count < k && temp != null) {
+            temp = temp.next;
+            count++;
+        }
+
+        // If count > 0, then we have nodes to reverse (even if < k, we reverse as per question)
+        if (count > 0) {
+            curr = head;
+            count = 0;
+
+            // Reverse k nodes
+            while (count < k && curr != null) {
+                next = curr.next;
+                curr.next = prev;
+                prev = curr;
+                curr = next;
+                count++;
+            }
+
+            // Recursively call for the rest of the list and connect
+            if (next != null) {
+                head.next = reverseKGroup(next, k);
+            }
+        }
+
+        return prev;
+        
+    }
+}
