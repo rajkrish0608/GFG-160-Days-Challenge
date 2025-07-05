@@ -1,0 +1,45 @@
+/*
+ * Name: Raj Krish
+ * Github: rajkrish0608
+ * Linkedln: www.linkedin.com/in/rajkrish0608
+ */
+
+class Solution {
+    public Node cloneLinkedList(Node head) {
+        if (head == null) return null;
+
+        // 1. Insert copied nodes after original nodes
+        Node curr = head;
+        while (curr != null) {
+            Node copy = new Node(curr.data);
+            copy.next = curr.next;
+            curr.next = copy;
+            curr = copy.next;
+        }
+
+        // 2. Assign random pointers to the copied nodes
+        curr = head;
+        while (curr != null) {
+            if (curr.random != null) {
+                curr.next.random = curr.random.next;
+            }
+            curr = curr.next.next;
+        }
+
+        // 3. Separate the original and copied lists
+        curr = head;
+        Node dummy = new Node(0);
+        Node copyCurr = dummy;
+
+        while (curr != null) {
+            Node copy = curr.next;
+            curr.next = copy.next; // restore original list
+            copyCurr.next = copy;
+            copyCurr = copy;
+            curr = curr.next;
+        }
+
+        return dummy.next;
+        
+    }
+}
