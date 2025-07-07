@@ -1,0 +1,32 @@
+/*
+ * Name: Raj Krish
+ * Github: rajkrish0608
+ * Linkedln: www.linkedin.com/in/rajkrish0608
+ */
+
+
+class Solution {
+    public static Node findFirstNode(Node head) {
+        Node slow = head;
+        Node fast = head;
+
+        // Step 1: Detect loop
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            
+            if (slow == fast) {
+                // Step 2: Find the start of the loop
+                slow = head;
+                while (slow != fast) {
+                    slow = slow.next;
+                    fast = fast.next;
+                }
+                return slow; // First node of the loop
+            }
+        }
+
+        return null; 
+        
+    }
+}
